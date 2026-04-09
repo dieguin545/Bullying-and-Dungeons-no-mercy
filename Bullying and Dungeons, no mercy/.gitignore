@@ -1,0 +1,10 @@
+Library/
+Temp/
+Obj/
+Build/
+.DS_Store
+*.csproj
+*.sln
+*.userprefs
+.vscode/
+.idea/
