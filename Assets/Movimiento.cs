@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
-   public float velocidad = 5f;
+   public float velocidad = 10f;
 
     void Update()
     {
@@ -11,19 +11,19 @@ public class Movimiento : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            movimientoY = 1f;
+            movimientoY = 20f;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movimientoY = -1f;
+            movimientoY = -20f;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movimientoX = -1f;
+            movimientoX = -20f;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movimientoX = 1f;
+            movimientoX = 20f;
         }
 
         Vector3 movimiento = new Vector3(movimientoX, movimientoY, 0f);
