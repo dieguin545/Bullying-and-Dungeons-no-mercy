@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6882646455426364716}
   - component: {fileID: 148086449268650732}
+  - component: {fileID: 9175949503514185680}
   m_Layer: 0
   m_Name: Personaje3
   m_TagString: Untagged
@@ -91,3 +92,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &9175949503514185680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031282370747250167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1014284a9c7d2240a7b699fef7c2ad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movimiento
+  velocidad: 10

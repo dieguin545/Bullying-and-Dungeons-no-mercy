@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Juego : MonoBehaviour
+public class Juego2 : MonoBehaviour
 {
 public void Inicio()
     {
-        SceneManager.LoadScene("Juego");
+        SceneManager.LoadScene("Juego2");
     }
 }
+
