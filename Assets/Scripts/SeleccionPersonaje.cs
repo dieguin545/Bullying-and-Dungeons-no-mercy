@@ -38,7 +38,8 @@ public class SeleccionPersonaje : MonoBehaviour
 
     public void Seleccionar()
     {
-        PlayerPrefs.SetInt("Personaje", indiceActual);
+        PlayerPrefs.SetInt("PersonajeSeleccionado", indiceActual);
+        PlayerPrefs.Save();
         Debug.Log("Personaje seleccionado: " + indiceActual);
     }
 }

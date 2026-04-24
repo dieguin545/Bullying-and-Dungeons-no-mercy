@@ -6,7 +6,7 @@ public class MostrarJugador : MonoBehaviour
 
     void Start()
     {
-        int id = PlayerPrefs.GetInt("Personaje", 0);
+        int id = PlayerPrefs.GetInt("PersonajeSeleccionado", 0);
 
         for (int i = 0; i < personajes.Length; i++)
         {

@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class SpawnJugador : MonoBehaviour
 {
-    public GameObject[] personajes; // prefabs o personajes
+    public GameObject[] personajes;
+    public Transform puntoSpawn;
+    public CamaraSeguir camara;
 
     void Start()
     {
-        int id = PlayerPrefs.GetInt("Personaje");
+        int personajeSeleccionado = PlayerPrefs.GetInt("PersonajeSeleccionado", 0);
 
-        Instantiate(personajes[id], transform.position, Quaternion.identity);
+        GameObject jugador = Instantiate(
+            personajes[personajeSeleccionado],
+            puntoSpawn.position,
+            Quaternion.identity
+        );
+
+        camara.objetivo = jugador.transform;
     }
 }
