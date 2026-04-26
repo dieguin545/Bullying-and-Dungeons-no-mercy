@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 [System.Serializable]
 public class Correo
@@ -13,6 +14,19 @@ public class Correo
     public string texto;
 
     public bool esBullying;
+
+}
+
+[System.Serializable]
+public class DatosPartida
+{
+    public int dineroTotal;
+    public int diasTrabajados;
+    public int ultimoSueldo;
+    public int ultimoDia;
+    public int errores;
+    public int correctos;
+    public int correosClasificados;
 }
 
 public class ControlCorreo : MonoBehaviour
@@ -45,6 +59,16 @@ public class ControlCorreo : MonoBehaviour
     int correosClasificados = 0;
     int sueldoBase = 100;
     bool activo = true;
+    string rutaArchivo = "";
+
+    bool modoLecturaActivado = false;
+
+    int tamRemitenteNormal;
+    int tamAsuntoNormal;
+    int tamCorreoNormal;
+    int tamResultadoNormal;
+    int tamDiaNormal;
+    int tamErroresNormal;
 
     public int dineroTotal = 0;
     public int diasTrabajados = 0;
@@ -58,11 +82,18 @@ public class ControlCorreo : MonoBehaviour
 
     void Start()
     {
-        panelAviso.SetActive(false);
-        panelFinDia.SetActive(false);
+         panelAviso.SetActive(false);
+         panelFinDia.SetActive(false);
 
-        CargarCorreos();
-        ActualizarErrores();
+         rutaArchivo = Path.Combine(Application.persistentDataPath, "partida_bullying.json");
+
+         CargarArchivo();
+         CargarCorreos();
+         ActualizarErrores();
+         GuardarTamanosNormales();
+
+
+
     }
 
     void CargarCorreos()
@@ -263,6 +294,8 @@ public class ControlCorreo : MonoBehaviour
         dineroTotal += sueldoFinal;
         diasTrabajados++;
 
+        GuardarArchivo();
+
         textoTituloFinDia.text = "Día " + dia + " terminado";
 
         textoResumenFinDia.text =
@@ -327,4 +360,79 @@ public class ControlCorreo : MonoBehaviour
     {
         panelAviso.SetActive(false);
     }
+
+    void GuardarArchivo()
+    {
+        DatosPartida datos = new DatosPartida();
+
+        datos.dineroTotal = dineroTotal;
+        datos.diasTrabajados = diasTrabajados;
+        datos.ultimoSueldo = ultimoSueldo;
+        datos.ultimoDia = dia;
+        datos.errores = errores;
+        datos.correctos = correctos;
+        datos.correosClasificados = correosClasificados;
+
+        string json = JsonUtility.ToJson(datos, true);
+        File.WriteAllText(rutaArchivo, json);
+
+        Debug.Log("Partida guardada en: " + rutaArchivo);
+    }
+
+    void CargarArchivo()
+    {
+        if (File.Exists(rutaArchivo))
+        {
+            string json = File.ReadAllText(rutaArchivo);
+            DatosPartida datos = JsonUtility.FromJson<DatosPartida>(json);
+
+            dineroTotal = datos.dineroTotal;
+            diasTrabajados = datos.diasTrabajados;
+            ultimoSueldo = datos.ultimoSueldo;
+
+            Debug.Log("Partida cargada desde: " + rutaArchivo);
+        }
+        else
+        {
+            Debug.Log("No existe archivo guardado todavía");
+        }
+    }
+    void GuardarTamanosNormales()
+    {
+        tamRemitenteNormal = textoRemitente.fontSize;
+        tamAsuntoNormal = textoAsunto.fontSize;
+        tamCorreoNormal = textoCorreo.fontSize;
+        tamResultadoNormal = textoResultado.fontSize;
+        tamDiaNormal = textoDia.fontSize;
+        tamErroresNormal = textoErrores.fontSize;
+    }
+
+    public void AlternarModoLectura()
+    {
+        modoLecturaActivado = !modoLecturaActivado;
+
+        if (modoLecturaActivado)
+        {
+            textoRemitente.fontSize = 24;
+            textoAsunto.fontSize = 24;
+            textoCorreo.fontSize = 30;
+            textoResultado.fontSize = 22;
+            textoDia.fontSize = 22;
+            textoErrores.fontSize = 22;
+
+            MostrarAviso("Modo lectura activado");
+        }
+        else
+        {
+            textoRemitente.fontSize = tamRemitenteNormal;
+            textoAsunto.fontSize = tamAsuntoNormal;
+            textoCorreo.fontSize = tamCorreoNormal;
+            textoResultado.fontSize = tamResultadoNormal;
+            textoDia.fontSize = tamDiaNormal;
+            textoErrores.fontSize = tamErroresNormal;
+
+            MostrarAviso("Modo lectura desactivado");
+        }
+    }
+
 }

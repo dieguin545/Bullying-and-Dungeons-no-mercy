@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juego2.unity
     guid: b50734e8a96efd6409fe22893607ce8d
+  - enabled: 1
+    path: Assets/Scenes/spaceshooter.unity
+    guid: 2d389a2c341ea7c44a6654435454efa0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
