@@ -1,23 +1,9 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class SpaceShooter : MonoBehaviour
-{
-    public GameObject Juego;
-    void Start()
+{   
+        public void retroceder()
     {
-        Juego.SetActive(false);
+        SceneManager.LoadScene("spaceshooter");
     }
-    public void abrir()
-    {
-        if (Juego.activeSelf)
-        {
-            Juego.SetActive(false);
-        }
-        else
-        {
-            Juego.SetActive(true);
-        }
-    }
-
-        
 }
