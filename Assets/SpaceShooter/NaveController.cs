@@ -4,8 +4,8 @@ public class NaveController : MonoBehaviour
 {
     [Header("Movimiento")]
     public float velocidad = 6f;
-    public float limiteX = 100f;
-    public float limiteZ = 100f;
+    public float limiteX = 300f;
+    public float limiteZ = 300f;
 
     [Header("Disparo")]
     public GameObject balaPrefab;
@@ -28,7 +28,7 @@ public class NaveController : MonoBehaviour
     {
         if (!GameManager.instancia.juegoActivo) return;
         Disparar();
-        Teleportar();
+
     }
 
     void FixedUpdate()
@@ -81,20 +81,6 @@ public class NaveController : MonoBehaviour
     }
 }
 
-    void Teleportar()
-    {
-        Vector3 pos = transform.position;
-
-        // Efecto Pacman en X
-        if (pos.x > limiteX) pos.x = -limiteX;
-        else if (pos.x < -limiteX) pos.x = limiteX;
-
-        // Efecto Pacman en Z
-        if (pos.z > limiteZ) pos.z = -limiteZ;
-        else if (pos.z < -limiteZ) pos.z = limiteZ;
-
-        transform.position = pos;
-    }
 
     void OnTriggerEnter(Collider otro)
     {
